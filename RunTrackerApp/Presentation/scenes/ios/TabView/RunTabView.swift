@@ -12,12 +12,15 @@ struct RunTabView: View {
     
     var body: some View {
         TabView(selection: $selection) {
-            RunView()
-                .tag(0)
-                .tabItem {
-                    RunTabItemView(tab: .home)
-                        .foregroundStyle(selection == 0 ? Color.accent : Color.secondary)
-                }
+            NavigationStack {
+                HomeView()
+            }
+            .ignoresSafeArea(edges: .bottom)
+            .tag(0)
+            .tabItem {
+                RunTabItemView(tab: .home)
+                    .foregroundStyle(selection == 0 ? Color.accent : Color.secondary)
+            }
             
         }
     }

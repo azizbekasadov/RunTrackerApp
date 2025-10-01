@@ -29,6 +29,8 @@ final class RunTrackerViewModel: NSObject {
     @ObservationIgnored
     private var endLocation: CLLocation?
     
+    var shouldShowCountDown = false
+    
     override init() {
         super.init()
         

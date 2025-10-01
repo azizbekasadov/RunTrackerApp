@@ -8,50 +8,66 @@
 import SwiftUI
 import MapKit
 
-// Location: 46.4908° N, 9.8355° E
-// St. Moritz, K. Graubünden, Schwiiz
-
 struct RunView: View {
-    @State private var viewModel = RunTrackerViewModel()
-    
     @ViewBuilder
-    private func MapView() -> some View {
-        Map(
-            coordinateRegion: $viewModel.region,
-            showsUserLocation: true
-        )
+    private func HeaderView() -> some View {
+        HStack {
+            VStack {
+                Text("Distance")
+            }
+            .frame(maxWidth: .infinity)
+            
+            VStack {
+                Text("BPM")
+            }
+            .frame(maxWidth: .infinity)
+            
+            VStack {
+                Text("Pace")
+            }
+            .frame(maxWidth: .infinity)
+        }
     }
     
     @ViewBuilder
-    private func StartButton() -> some View {
-        Button {
-            
-        } label: {
-            Text("Start")
-                .bold()
-                .font(.headline)
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity)
+    private func MainCounterView() -> some View {
+        Text("00:00")
+            .font(.system(size: 64, weight: .medium))
+        
+        Text("Time")
+            .foregroundStyle(.gray)
+    }
+    
+    @ViewBuilder
+    private func BottomView() -> some View {
+        HStack {
+            Button {
+                
+            } label: {
+                Image(systemName: "pause.fill")
+                    .font(.largeTitle)
+                    .foregroundStyle(.white)
+                    .background(
+                        Circle()
+                            .fill(Color.black)
+                    )
+            }
+
         }
-        .frame(height: 50)
-        .background(Color.primary)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                MapView()
-                
-                VStack {
-                    Spacer()
-                    
-                    StartButton()
-                }
-                .padding([.bottom, .horizontal], 24)
-            }
+        VStack {
+            HeaderView()
+            Spacer()
+            
+            MainCounterView()
+            
+            Spacer()
+            
+            BottomView()
         }
-        .navigationTitle("Run")
+        .frame(maxWidth: .infinity, alignment: .top)
     }
 }
 
